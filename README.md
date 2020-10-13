@@ -1,11 +1,11 @@
 ### Date created
-This project was created in August 2020, while this READEME file was created on October 12, 2020.
+This project was created in August 2020, while this README file was created on October 12, 2020.
 
 ### Project Title
 BikeShare Project
 
 ### Description
-Describe what your project is about and what it does
+Python is used to explore data retrieved from bikeshare systems in Chicago, New York City and Washington.
 
 ### Files used
 Include the files used
