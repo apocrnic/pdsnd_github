@@ -7,6 +7,8 @@ BikeShare Project
 ### Description
 Python is used to explore data retrieved from bikeshare systems in Chicago, New York City and Washington.
 
+The code imports data and answers questions.
+
 ### Files used
 chicago.csv
 new_york_city.csv
