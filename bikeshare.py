@@ -24,50 +24,50 @@ def get_filters():
     print('Hello! Let\'s explore some US bikeshare data!')
 
     # TO DO: get user input for city (chicago, new york city, washington).
-    valid_answer = 0
-    while valid_answer == 0:
+    valid_city_answer = 0
+    while valid_city_answer == 0:
         ask_city = input('\nWould you like to see data for Chicago, New York, or Washington?\n')
         if ask_city.lower() == 'chicago':
             city = 'chicago'
-            valid_answer = 1
+            valid_city_answer = 1
         elif ask_city.lower() == 'new york':
             city = 'new york city'
-            valid_answer = 1
+            valid_city_answer = 1
         elif ask_city.lower() == 'washington':
             city = 'washington'
-            valid_answer = 1
+            valid_city_answer = 1
         else:
-            print("\nYour answer wasn't one of the three choices. Try again.")
-            valid_answer = 0
-            
+            print("\nYour answer wasn't one of the three choices. Try again..")
+            valid_city_answer = 0
+
     # TO DO: get user input for month (all, january, february, ... , june)
-    valid_answer = 0
+    valid_month_answer = 0
     while valid_answer == 0:
         ask_month = input('\nWhich month would you like to filter by? January, February, March, April, May, or June? Type "none" for no time filter\n')
         if ask_month.lower() == 'january':
             month = 1
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'february':
             month = 2
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'march':
             month = 3
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'april':
             month = 4
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'may':
             month = 5
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'june':
             month = 6
-            valid_answer = 1     
+            valid_month_answer = 1
         elif ask_month.lower() == 'none':
             month = 100
-            valid_answer = 1              
+            valid_month_answer = 1
         else:
             print("\nYour answer wasn't one of the six choices. Try again.")
-            valid_answer = 0
+            valid_month_answer = 0
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     valid_answer = 0
@@ -93,10 +93,10 @@ def get_filters():
             valid_answer = 1
         elif ask_day == '7':
             day = 5
-            valid_answer = 1     
+            valid_answer = 1
         elif ask_day == 'none':
             day = 100
-            valid_answer = 1                  
+            valid_answer = 1
         else:
             print("\nYour answer wasn't one of the 7 integer choices available. Try again.")
             valid_answer = 0
@@ -119,18 +119,18 @@ def load_data(city, month, day):
 
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     # extract month and day of the week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
     df['month_full_name'] = df['Start Time'].dt.month_name()
 
-    
+
     df['day_of_week'] = df['Start Time'].dt.weekday_name
-    df['day_of_week_integer'] = df['Start Time'].dt.weekday    
-   
+    df['day_of_week_integer'] = df['Start Time'].dt.weekday
+
     if day != 100:
         df = df[df['day_of_week_integer'] == day]
     if month != 100:
@@ -147,22 +147,22 @@ def time_stats(df, month, day):
     # TO DO: display the most common start hour
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     # extract hour from the Start Time column to create an hour column
     df['hour'] = df['Start Time'].dt.hour
-    
+
     # find the most popular hour
     popular_hour = df['hour'].mode()[0]
     number_of_appearances_hour = df['hour'].value_counts().max()
-    
+
      # find the most popular day
     popular_day = df['day_of_week'].mode()[0]
     number_of_appearances_day = df['day_of_week'].value_counts().max()
-    
+
     # find the most popular month
     popular_month = df['month_full_name'].mode()[0]
     number_of_appearances_month = df['month_full_name'].value_counts().max()
-     
+
     print('The most popular start hour:', popular_hour, ', Count:', number_of_appearances_hour)
     if day == 100:
             print('The most popular day of the week is:', popular_day, ', Count:', number_of_appearances_day)
@@ -184,18 +184,18 @@ def station_stats(df):
     popular_start_station = df['Start Station'].mode()[0]
     number_of_appearances_start_station = df['Start Station'].value_counts().max()
     print('The most popular starting station:', popular_start_station, ', Count:', number_of_appearances_start_station)
-    
+
     # TO DO: display most commonly used end station
     popular_end_station = df['End Station'].mode()[0]
     number_of_appearances_end_station = df['End Station'].value_counts().max()
     print('The most popular ending station:', popular_end_station, ', Count:', number_of_appearances_end_station)
-    
+
     # TO DO: display most frequent combination of start station and end station trip
     popular_trip = df.groupby(['Start Station','End Station']).size().idxmax()
     count_popular_trip = df.groupby(['Start Station','End Station']).size().sort_values(ascending = False)[0]
-    
+
     print('The most popular trip:', popular_trip, ', Count:', count_popular_trip)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -207,7 +207,7 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     df['End Time'] = pd.to_datetime(df['End Time'])
-    
+
     #TO DO: display total travel time
     df['Elapsed_Time'] = df['End Time']-df['Start Time']
     total_travel_time = df['Elapsed_Time'].sum()
@@ -229,7 +229,7 @@ def user_stats(df, city):
     # TO DO: Display counts of user types
     user_type_counts = df['User Type'].value_counts()
     print('The breakdown of users is: \n', user_type_counts)
-    
+
 
     if city != "washington":
         # TO DO: Display counts of gender
@@ -256,7 +256,7 @@ def display_raw_data(df):
             counter = 2
         else:
             raw_data = input('Would you like to see 5 more rows of raw data?\nPlease select yes or no. ').lower()
-            
+
         if (raw_data == 'yes'):
             print(df.iloc[lines_to_display-5:lines_to_display],'\n')
             lines_to_display+=5
