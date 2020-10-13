@@ -41,33 +41,33 @@ def get_filters():
             valid_city_answer = 0
 
     # TO DO: get user input for month (all, january, february, ... , june)
-    valid_answer = 0
+    valid_month_answer = 0
     while valid_answer == 0:
         ask_month = input('\nWhich month would you like to filter by? January, February, March, April, May, or June? Type "none" for no time filter\n')
         if ask_month.lower() == 'january':
             month = 1
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'february':
             month = 2
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'march':
             month = 3
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'april':
             month = 4
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'may':
             month = 5
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'june':
             month = 6
-            valid_answer = 1
+            valid_month_answer = 1
         elif ask_month.lower() == 'none':
             month = 100
-            valid_answer = 1
+            valid_month_answer = 1
         else:
             print("\nYour answer wasn't one of the six choices. Try again.")
-            valid_answer = 0
+            valid_month_answer = 0
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     valid_answer = 0
